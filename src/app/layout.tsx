@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar/Navbar";
-
-const inter = Inter({ subsets: ["latin"] });
+import TopNavbar from "./components/TopNavbar/TopNavbar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,11 +17,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <div className="flex place-items-center px-6 h-[80px] bg-neutral-900">
+          <TopNavbar />
+        </div>
         <div className="flex">
           <div className="w-[220px] px-6 bg-neutral-900 h-screen">
             <Navbar />
           </div>
-          <div className="flex place-items-center m-auto">{children}</div>
+          <div className="mx-auto">{children}</div>
         </div>
       </body>
     </html>
