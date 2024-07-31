@@ -1,8 +1,9 @@
+import { Thread } from "@/app/page";
 import React from "react";
 
-const ThreadPostContainer = ({ name }: any) => {
+const ThreadPostContainer = ({ name, text }: Thread) => {
   return (
-    <div className="md:container  flex gap-4 p-6 bg-neutral-900 rounded-xl">
+    <div className=" flex gap-4 p-6 bg-neutral-900 rounded-xl">
       <div className="flex flex-col gap-1">
         <img
           src=""
@@ -15,11 +16,7 @@ const ThreadPostContainer = ({ name }: any) => {
       </div>
       <div className="flex flex-col gap-4">
         <span>{name}</span>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, amet
-          sunt. Voluptatem dolore a aperiam omnis iusto nostrum, incidunt minus
-          vero dignissimos.
-        </p>
+        <p>{text}</p>
         <div className="flex gap-4">
           <span>like</span>
           <span>reply</span>
