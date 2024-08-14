@@ -1,66 +1,49 @@
-"use client";
-import ThreadPostContainer from "@/components/ThreadPostContainer";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 
-const page = () => {
-  const [toggleType, setToggleType] = useState("threads");
-  let username = "ijonel906";
+import { getSessionUser } from "@/utils/getSessionUser";
+import connectDB from "@/config/database";
+import Profile from "@/components/Profile";
+import Post from "@/models/Post";
+import User from "@/models/User";
+import Image from "next/image";
+import profileImg from "@/assets/images/profile.png";
+const page = async () => {
+  const sessionUser = await getSessionUser();
+  await connectDB();
+  console.log(sessionUser?.userId);
+  const { userId, user: googleUser }: any = sessionUser;
+  const { name, bio, username }: string | null = await User.findById(
+    userId
+  ).lean();
+
+  await connectDB();
+  const posts = await Post.find({ owner: userId }).lean();
+  console.log("googleuser", googleUser);
   return (
     <div className="flex flex-col gap-8">
       <div className="flex place-items-center gap-2">
-        <img src="" alt="" className="size-14 rounded-full bg-white" />
+        <Image
+          src={googleUser.image || profileImg}
+          alt=""
+          width={40}
+          height={40}
+          className="size-14 rounded-full bg-white"
+        />
         <div className="flex flex-col">
-          <span className="font-bold">Jonel</span>
-          <span className="text-neutral-400 font-bold">@ijonel906</span>
+          <span className="font-bold">{name}</span>
+          <span className="text-neutral-400 font-bold">@{username}</span>
         </div>
       </div>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde quia,
-        voluptatibus aliquid obcaecati in consequatur quisquam illo ducimus
-        dolorem odio.
-      </p>
-      <div className="flex">
-        <button
-          dir="ltr"
-          className={`${
-            toggleType == "threads" ? "bg-neutral-950" : "bg-neutral-900"
-          } flex-1 py-2 rounded-s-md`}
-          onClick={() => setToggleType("threads")}
-        >
-          Threads
-        </button>
-        <button
-          className={`${
-            toggleType == "replies" ? "bg-neutral-950" : "bg-neutral-900"
-          } flex-1 py-2`}
-          onClick={() => setToggleType("replies")}
-        >
-          Replies
-        </button>
-        <button
-          dir="rtl"
-          className={`${
-            toggleType == "repost" ? "bg-neutral-950" : "bg-neutral-900"
-          } flex-1 py-2 rounded-s-lg`}
-          onClick={() => setToggleType("repost")}
-        >
-          Repost
-        </button>
-      </div>
-      <div>
-        {/* 
-        ONLY SHOW LOGGED USERS THREAD POSTS
-        */}
-        {toggleType == "threads" && (
-          <div>
-            <ThreadPostContainer name={"ijonel906"} text={"testing"} />
-          </div>
-        )}
-        {toggleType == "replies" && <div>Replies Posts</div>}
-        {toggleType == "repost" && <div>Repost Posts</div>}
-      </div>
+      <p>{bio}</p>
+
+      {/* CLIENT COMPONENTS USED HERE */}
+      <Profile posts={posts} googleUser={googleUser} />
+      {/* 
+          ONLY SHOW LOGGED USERS THREAD POSTS
+          */}
     </div>
   );
+  // <Profile sessionUser={sessionUser} posts={posts} />;
 };
 
 export default page;

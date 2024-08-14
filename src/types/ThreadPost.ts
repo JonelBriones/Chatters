@@ -1,4 +1,4 @@
-export interface Post {
+export interface PostInterface {
   id: number;
   user_id: number;
   text: string;
@@ -6,9 +6,9 @@ export interface Post {
   reply: [];
   save: [];
 }
-export interface User {
+export interface UserInterface {
   id: number;
   username: string;
   name: string;
-  posts: Post[];
+  posts: PostInterface[];
 }

@@ -1,0 +1,28 @@
+[
+  {
+    "_id": "1",
+    "text": "I love the new one piece episode!",
+    "images": [],
+    "likes": ["ijonel906", "jonelbriones"],
+    "replies": []
+  },
+  {
+    "_id": "2",
+    "text": "Dragonball is cool!",
+    "images": [],
+    "likes": ["ijonel906", "jonelbriones"],
+    "replies": []
+  },
+  {
+    "_id": "3",
+    "text": "Naruto is life",
+    "images": [],
+    "likes": ["narutolover23"],
+    "replies": [
+      {
+        "owner": 1,
+        "text": "I can agree with this"
+      }
+    ]
+  }
+]
