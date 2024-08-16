@@ -1,22 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import ThreadPostContainer from "./ThreadPostContainer";
-import connectDB from "@/config/database";
-import { getSessionUser } from "@/utils/getSessionUser";
+import React, { useState } from "react";
 
-const Profile = ({ posts }: any, { googleUser }: any) => {
+import ProfilePostCard from "./ProfilePostCard";
+
+const ProfilePost = ({ posts, user }: any) => {
   const [toggleType, setToggleType] = useState("threads");
-  const [user, setUser] = useState({});
-
-  useEffect(() => {
-    const getUser = async () => {
-      const { user } = getSessionUser();
-      // await connectDB();
-      setUser(user);
-    };
-    getUser();
-  }, []);
-
   return (
     <div className="flex flex-col gap-8">
       <div className="flex">
@@ -55,7 +43,7 @@ const Profile = ({ posts }: any, { googleUser }: any) => {
           <>
             {posts?.map((post: any) => (
               <div key={post._id}>
-                <ThreadPostContainer post={post} />
+                <ProfilePostCard post={post} user={user} />
               </div>
             ))}
           </>
@@ -67,4 +55,4 @@ const Profile = ({ posts }: any, { googleUser }: any) => {
   );
 };
 
-export default Profile;
+export default ProfilePost;

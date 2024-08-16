@@ -31,12 +31,7 @@ const PostSchema = new Schema(
       {
         owner: {
           type: Schema.Types.ObjectId,
-          ref: "User",
-          required: [true],
-        },
-        text: {
-          type: String,
-          required: [true],
+          ref: "Comment",
         },
       },
     ],

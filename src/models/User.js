@@ -26,6 +26,12 @@ const UserSchema = new Schema(
         ref: "Post",
       },
     ],
+    likes: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
     // replies: [
     //   {
     //     type: Schema.Types.ObjectId,

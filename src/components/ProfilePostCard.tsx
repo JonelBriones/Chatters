@@ -1,19 +1,12 @@
 import Image from "next/image";
 import profileImg from "@/assets/images/profile.png";
-import connectDB from "@/config/database";
-import User from "@/models/User";
-import PostButtons from "./PostButtons";
 
-const ThreadPostContainer = async ({ post }: any) => {
-  await connectDB();
-  const postOwner = await User.findById(post.owner);
-  console.log("postowner", postOwner);
-
+const ProfilePostCard = ({ post, user }: any) => {
   return (
     <div className=" flex gap-4 p-6 bg-neutral-900 rounded-xl">
       <div className="flex flex-col gap-1">
         <Image
-          src={postOwner?.image || profileImg}
+          src={user?.image || profileImg}
           alt=""
           width={40}
           height={40}
@@ -27,10 +20,15 @@ const ThreadPostContainer = async ({ post }: any) => {
         <span>@{post.username}</span>
         <p>{post.text}</p>
 
-        <PostButtons post={post} />
+        <div className="flex gap-4">
+          <span>{post.likes.length} likes</span>
+          <span>reply</span>
+          <span>share</span>
+          <span>save</span>
+        </div>
       </div>
     </div>
   );
 };
 
-export default ThreadPostContainer;
+export default ProfilePostCard;
