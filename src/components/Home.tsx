@@ -2,11 +2,14 @@ import ThreadPostContainer from "@/components/ThreadPostContainer";
 import React from "react";
 import connectDB from "@/config/database";
 import Post from "@/models/Post";
+import { getSessionUser } from "@/utils/getSessionUser";
+
 const Home = async () => {
   await connectDB();
+
   const posts = await Post.find({}).lean();
   let post = JSON.parse(JSON.stringify(posts));
-  // console.log(posts);
+
   return (
     <div className="flex flex-col gap-8">
       <h1 className="font-bold text-3xl">Home Page</h1>

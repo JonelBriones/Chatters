@@ -1,7 +1,7 @@
 "use server";
 import connectDB from "@/config/database";
-import { getSessionUser } from "@/utils/getSessionUser";
 import Post from "@/models/Post";
+import { getSessionUser } from "@/utils/getSessionUser";
 import { revalidatePath } from "next/cache";
 async function likePost(id) {
   console.log("running like post function", id);
@@ -31,9 +31,6 @@ async function likePost(id) {
     isLiked = true;
   }
   console.log("liked post", isLiked);
-  //   const postData = {
-  //     likes: [...existingPost.likes, userId],
-  //   };
 
   await existingPost.save();
 

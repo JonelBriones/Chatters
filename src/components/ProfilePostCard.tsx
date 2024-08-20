@@ -1,5 +1,6 @@
 import Image from "next/image";
 import profileImg from "@/assets/images/profile.png";
+import PostButtons from "./PostButtons";
 
 const ProfilePostCard = ({ post, user }: any) => {
   return (
@@ -19,13 +20,7 @@ const ProfilePostCard = ({ post, user }: any) => {
       <div className="flex flex-col gap-4">
         <span>@{post.username}</span>
         <p>{post.text}</p>
-
-        <div className="flex gap-4">
-          <span>{post.likes.length} likes</span>
-          <span>reply</span>
-          <span>share</span>
-          <span>save</span>
-        </div>
+        <PostButtons post={post} user={user} />
       </div>
     </div>
   );

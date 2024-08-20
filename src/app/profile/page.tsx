@@ -8,8 +8,10 @@ import ProfileHeader from "@/components/ProfileHeader";
 const page = async () => {
   await connectDB();
   const { userId }: any | null = await getSessionUser();
-  const user = await User.findById(userId);
-  const posts = await Post.find({ owner: userId }).lean();
+  const userResult = await User.findById(userId);
+  const user = JSON.parse(JSON.stringify(userResult));
+  const userPosts = await Post.find({ owner: userId }).lean();
+  const posts = JSON.parse(JSON.stringify(userPosts));
   console.log("user", user);
 
   return (

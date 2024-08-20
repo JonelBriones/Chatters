@@ -40,13 +40,13 @@ const ProfilePost = ({ posts, user }: any) => {
           ONLY SHOW LOGGED USERS THREAD POSTS
           */}
         {toggleType == "threads" && (
-          <>
+          <div className="flex flex-col gap-4 ">
             {posts?.map((post: any) => (
               <div key={post._id}>
                 <ProfilePostCard post={post} user={user} />
               </div>
             ))}
-          </>
+          </div>
         )}
         {toggleType == "replies" && <div>Replies Posts</div>}
         {toggleType == "repost" && <div>Repost Posts</div>}

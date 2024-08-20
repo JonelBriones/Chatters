@@ -32,7 +32,7 @@ export const authOptions = {
         await User.create({
           email: profile.email,
           name: username,
-          username,
+          username: username.trim(),
           image: profile.picture,
         });
       }
@@ -54,37 +54,3 @@ export const authOptions = {
     },
   },
 };
-/*
-Profile {
-  iss: 'https://accounts.google.com',
-  azp: '367334560401-ekd9l8hupn2q6o5t4tlmi3b6i6gvqaqj.apps.googleusercontent.com',
-  aud: '367334560401-ekd9l8hupn2q6o5t4tlmi3b6i6gvqaqj.apps.googleusercontent.com',
-  sub: '101971335187043669472',
-  email: 'jonel.c.briones@gmail.com',
-  email_verified: true,
-  at_hash: 'eK-6pCbbxfa1mlxoMMfWyA',
-  name: 'Jonel Briones',
-  picture: 'https://lh3.googleusercontent.com/a/ACg8ocJc18f-h9chAAZLjarbI1cd2RINFssl-ecjamaRJdlRkgTrNZI=s96-c',
-  given_name: 'Jonel',
-  family_name: 'Briones',
-  iat: 1723538355,
-  exp: 1723541955
-}
-  Profile {
-  iss: 'https://accounts.google.com',
-  azp: '367334560401-ekd9l8hupn2q6o5t4tlmi3b6i6gvqaqj.apps.googleusercontent.com',
-  aud: '367334560401-ekd9l8hupn2q6o5t4tlmi3b6i6gvqaqj.apps.googleusercontent.com',
-  sub: '113743524839530549515',
-  email: 'ijonel906@gmail.com',
-  email_verified: true,
-  at_hash: '7m7Krmhx_c3SDJqQOR42Ag',
-  name: 'Jonel Briones',
-  picture: 'https://lh3.googleusercontent.com/a/ACg8ocIZeZ0anH0bs_tsFDaSe3oV4XEMiJsg2yE-vhj7N2APObOaP3tu=s96-c',
-  given_name: 'Jonel',
-  family_name: 'Briones',
-  iat: 1723538232,
-  exp: 1723541832
-}
-
-
-*/
