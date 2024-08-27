@@ -27,7 +27,7 @@ async function createTweet(formData) {
 
   revalidatePath("/", "layout");
 
-  redirect(`/tweet/${newTweet.id}`);
+  redirect(`/`);
 }
 
 export default createTweet;

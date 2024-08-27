@@ -17,7 +17,8 @@ const page = async () => {
   return (
     <div>
       <ProfileHeader user={user} />
-      <ProfilePost posts={posts} user={user} />
+
+      <ProfilePost posts={posts.reverse()} user={user} />
     </div>
   );
 };

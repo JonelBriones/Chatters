@@ -36,7 +36,7 @@ const PostSchema = new Schema(
       },
     ],
   },
-  { timestamp: true }
+  { timestamps: true }
 );
 
 const Post = models.Post || model("Post", PostSchema);

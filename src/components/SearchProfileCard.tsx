@@ -31,7 +31,7 @@ const SearchProfileCard = ({ user }: any) => {
             View
           </button>
         </div>
-      ) : user._id == session?.user.id ? (
+      ) : user._id == session?.user?.id ? (
         <button className="h-8 px-6 text-sm bg-cyan-500 rounded-md">
           View
         </button>

@@ -4,10 +4,36 @@ import connectDB from "@/config/database";
 import User from "@/models/User";
 import PostButtons from "./PostButtons";
 
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+import relativeTime from "dayjs/plugin/relativeTime";
 const ThreadPostContainer = async ({ post }: any) => {
   await connectDB();
   const postOwner = await User.findById(post.owner);
-  console.log("postowner", postOwner);
+  // console.log("postowner", postOwner);
+
+  dayjs.extend(duration);
+  dayjs.extend(relativeTime);
+
+  // const isoDate = "2024-08-20T11:14:58.140+00:00";
+  const isoDate = post.createdAt;
+  const pastDate = dayjs(isoDate);
+  const currentDate = dayjs();
+
+  // Calculate the difference
+  const diff = dayjs.duration(currentDate.diff(pastDate));
+
+  // Format the output
+  const timeDifference = `${diff.years()} years, ${diff.months()} months, ${diff.days()} days, ${diff.hours()} hours, ${diff.minutes()} minutes, ${diff.seconds()} seconds`;
+
+  let format;
+  format =
+    (diff.years() > 0 && `${diff.years()} years ago`) ||
+    (diff.months() > 0 && `${diff.months()} months ago`) ||
+    (diff.days() > 0 && `${diff.days()} days ago`) ||
+    (diff.hours() > 0 && `${diff.hours()} hours ago`) ||
+    (diff.minutes() > 0 && `${diff.minutes()} minutes ago`) ||
+    (diff.seconds() < 59 && `${diff.seconds()} seconds ago`);
 
   return (
     <div className=" flex gap-4 p-6 bg-neutral-900 rounded-xl">
@@ -24,7 +50,10 @@ const ThreadPostContainer = async ({ post }: any) => {
         </div>
       </div>
       <div className="flex flex-col gap-4">
-        <span>@{post.username}</span>
+        <span>
+          @{post.username}{" "}
+          <span className="text-sm text-gray-400">{format}</span>
+        </span>
         <p>{post.text}</p>
 
         <PostButtons post={post} />

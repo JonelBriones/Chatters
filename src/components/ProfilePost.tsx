@@ -5,6 +5,7 @@ import ProfilePostCard from "./ProfilePostCard";
 
 const ProfilePost = ({ posts, user }: any) => {
   const [toggleType, setToggleType] = useState("threads");
+
   return (
     <div className="flex flex-col gap-8">
       <div className="flex">

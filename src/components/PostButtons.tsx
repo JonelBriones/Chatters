@@ -13,7 +13,6 @@ import { useSession } from "next-auth/react";
 
 const PostButtons = ({ post }: any) => {
   const { data: user } = useSession();
-  console.log(user);
 
   const onHandleLikePost = async () => {
     likePost(post._id);

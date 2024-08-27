@@ -9,7 +9,7 @@ const ProfileHeader = async ({ user }: any) => {
     <div className="flex flex-col gap-8">
       <div className="flex place-items-center gap-2">
         <Image
-          src={googleUser?.image || profileImg}
+          src={user.image || googleUser?.image || profileImg}
           alt=""
           width={40}
           height={40}
