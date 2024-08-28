@@ -1,10 +1,37 @@
+import followUser from "@/app/actions/followUser";
+import redirectToSignIn from "@/app/actions/redirectToSignIn";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
 
 const SearchProfileCard = ({ user }: any) => {
   const { data: session } = useSession();
-  let isFollowing = user.followers.includes(session?.user.id);
+  let isUserFollowingYou = user.followings.includes(session?.user?.id);
+  let isLoggedUserFollowingBack = user.followers.includes(session?.user?.id);
+
+  const onHandleFollowUser = async () => {
+    console.log(user);
+    if (!user) {
+      redirectToSignIn();
+      return;
+    }
+    followUser(user._id);
+  };
+  console.log("user", user);
+
+  function followType() {
+    if (isUserFollowingYou && !isLoggedUserFollowingBack) {
+      return "Follow Back";
+    } else if (
+      (isUserFollowingYou && isLoggedUserFollowingBack) ||
+      (!isUserFollowingYou && isLoggedUserFollowingBack)
+    ) {
+      return "Unfollow";
+    } else {
+      return "Follow";
+    }
+  }
+
   return (
     <div className="p-2 flex justify-between place-items-center">
       <div className="flex gap-2 place-items-center">
@@ -22,7 +49,18 @@ const SearchProfileCard = ({ user }: any) => {
           </span>
         </div>
       </div>
-      {isFollowing ? (
+      <div className="flex flex-row gap-2">
+        <button
+          className="h-8 px-6 text-sm bg-cyan-500 rounded-md"
+          onClick={onHandleFollowUser}
+        >
+          {followType()}
+        </button>
+        <button className="h-8 px-6 text-sm bg-cyan-500 rounded-md">
+          View
+        </button>
+      </div>
+      {/* {isFollowing ? (
         <div className="flex flex-row gap-2">
           <button className="h-8 px-6 text-sm bg-cyan-500 rounded-md">
             unfollow
@@ -44,7 +82,7 @@ const SearchProfileCard = ({ user }: any) => {
             View
           </button>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

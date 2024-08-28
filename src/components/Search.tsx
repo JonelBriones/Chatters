@@ -3,9 +3,11 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import SearchProfileCard from "./SearchProfileCard";
+import { useSession } from "next-auth/react";
 
 const Search = ({ users }: any) => {
   const [search, setSearch] = useState("");
+  const { data: session } = useSession();
 
   return (
     <div className="flex flex-col gap-8">
@@ -20,10 +22,11 @@ const Search = ({ users }: any) => {
         />
       </div>
       {users.map((user: any) =>
-        !search ? (
+        !search && user._id != session?.user?.id ? (
           <SearchProfileCard user={user} key={user._id} />
         ) : (
-          user.username.toLowerCase().includes(search) && (
+          user.username.toLowerCase().includes(search) &&
+          user._id != session?.user?.id && (
             <SearchProfileCard user={user} key={user._id} />
           )
         )

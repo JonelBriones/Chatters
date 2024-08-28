@@ -10,11 +10,17 @@ import {
   FaShare,
 } from "react-icons/fa";
 import { useSession } from "next-auth/react";
+import redirectToSignIn from "@/app/actions/redirectToSignIn";
 
 const PostButtons = ({ post }: any) => {
   const { data: user } = useSession();
 
   const onHandleLikePost = async () => {
+    console.log(user);
+    if (!user) {
+      redirectToSignIn();
+      return;
+    }
     likePost(post._id);
   };
   let isLiked = post.likes.includes(user?.user?.id);
