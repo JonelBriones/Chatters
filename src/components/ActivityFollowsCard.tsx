@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import profileImg from "@/assets/images/profile.png";
 import followUser from "@/app/actions/followUser";
 import redirectToSignIn from "@/app/actions/redirectToSignIn";
@@ -13,6 +13,11 @@ const ActivityFollowsCard = ({ currentUser, user }: any) => {
     followUser(user._id);
     // followUser("66c482be3a5df48bf52cfddf");
   };
+  const [hoverUnfollow, setHoverUnfollow] = useState("");
+
+  let isUserFollowingYou = user.followings.includes(currentUser._id);
+  let isLoggedUserFollowingBack = user.followers.includes(currentUser._id);
+
   return (
     <div className="flex justify-between">
       <div className="flex gap-2 place-items-center">
@@ -32,8 +37,14 @@ const ActivityFollowsCard = ({ currentUser, user }: any) => {
       </div>
 
       <button
-        className="h-8 px-6 text-sm bg-cyan-500 rounded-md"
+        className={`h-8 px-6 text-sm bg-cyan-500 rounded-md ${
+          isUserFollowingYou && isLoggedUserFollowingBack
+            ? "hover:bg-red-600 w-[100px]"
+            : ""
+        } transition-color ease-out duration-700`}
         onClick={onHandleFollowUser}
+        onMouseOver={() => setHoverUnfollow("Unfollow")}
+        onMouseLeave={() => setHoverUnfollow("")}
       >
         {/* 
         // if logged user follows another user = unfollow
@@ -41,15 +52,16 @@ const ActivityFollowsCard = ({ currentUser, user }: any) => {
         // if logged user does not follow the other user who is follow the logged user = follow back
         
          */}
-        {user.followings.includes(currentUser._id) &&
-          currentUser.followings.includes(user._id) &&
-          "Unfollow"}
-        {user.followings.includes(currentUser._id) &&
-          !currentUser.followings.includes(user._id) &&
-          "Follow Back"}
-        {!user.followings.includes(currentUser._id) &&
-          !currentUser.followings.includes(user._id) &&
-          "Follow"}
+        {isUserFollowingYou &&
+          isLoggedUserFollowingBack &&
+          !hoverUnfollow &&
+          "Friends"}
+        {isUserFollowingYou &&
+          isLoggedUserFollowingBack &&
+          hoverUnfollow &&
+          hoverUnfollow}
+        {isUserFollowingYou && !isLoggedUserFollowingBack && "Follow Back"}
+        {!isUserFollowingYou && !isLoggedUserFollowingBack && "Follow"}
       </button>
     </div>
   );

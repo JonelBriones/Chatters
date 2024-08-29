@@ -13,7 +13,7 @@ const Activity = ({ user, users, posts }: any) => {
         <button
           dir="ltr"
           className={`${
-            toggleType == "threads" ? "bg-neutral-950" : "bg-neutral-900"
+            toggleType == "likes" ? "bg-neutral-950" : "bg-neutral-900"
           } flex-1 py-2 rounded-s-md`}
           onClick={() => setToggleType("likes")}
         >
@@ -21,7 +21,7 @@ const Activity = ({ user, users, posts }: any) => {
         </button>
         <button
           className={`${
-            toggleType == "replies" ? "bg-neutral-950" : "bg-neutral-900"
+            toggleType == "followers" ? "bg-neutral-950" : "bg-neutral-900"
           } flex-1 py-2`}
           onClick={() => setToggleType("followers")}
         >

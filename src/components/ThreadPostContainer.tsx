@@ -3,10 +3,10 @@ import profileImg from "@/assets/images/profile.png";
 import connectDB from "@/config/database";
 import User from "@/models/User";
 import PostButtons from "./PostButtons";
-
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
+import Link from "next/link";
 const ThreadPostContainer = async ({ post }: any) => {
   await connectDB();
   const postOwner = await User.findById(post.owner);
@@ -51,7 +51,7 @@ const ThreadPostContainer = async ({ post }: any) => {
       </div>
       <div className="flex flex-col gap-4">
         <span>
-          @{post.username}{" "}
+          <Link href={`/profile/${postOwner._id}`}>@{post.username} </Link>
           <span className="text-sm text-gray-400">{format}</span>
         </span>
         <p>{post.text}</p>

@@ -2,7 +2,8 @@ import followUser from "@/app/actions/followUser";
 import redirectToSignIn from "@/app/actions/redirectToSignIn";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import React from "react";
+import Link from "next/link";
+import React, { useState } from "react";
 
 const SearchProfileCard = ({ user }: any) => {
   const { data: session } = useSession();
@@ -31,7 +32,7 @@ const SearchProfileCard = ({ user }: any) => {
       return "Follow";
     }
   }
-
+  const [hoverUnfollow, setHoverUnfollow] = useState("");
   return (
     <div className="p-2 flex justify-between place-items-center">
       <div className="flex gap-2 place-items-center">
@@ -51,38 +52,36 @@ const SearchProfileCard = ({ user }: any) => {
       </div>
       <div className="flex flex-row gap-2">
         <button
-          className="h-8 px-6 text-sm bg-cyan-500 rounded-md"
+          className={`h-8 px-6 text-sm bg-cyan-500 rounded-md ${
+            isUserFollowingYou && isLoggedUserFollowingBack
+              ? "hover:bg-red-600 w-[100px]"
+              : ""
+          } transition-color ease-out duration-700`}
           onClick={onHandleFollowUser}
+          onMouseOver={() => setHoverUnfollow("Unfollow")}
+          onMouseLeave={() => setHoverUnfollow("")}
         >
-          {followType()}
+          {isUserFollowingYou && !isLoggedUserFollowingBack && "Follow Back"}
+          {!isUserFollowingYou && isLoggedUserFollowingBack && "Following"}
+          {!isUserFollowingYou && !isLoggedUserFollowingBack && "Follow"}
+          {isUserFollowingYou &&
+            isLoggedUserFollowingBack &&
+            !hoverUnfollow &&
+            "Friends"}
+          {isUserFollowingYou &&
+            isLoggedUserFollowingBack &&
+            hoverUnfollow &&
+            hoverUnfollow}
+
+          {/* {followType()} */}
         </button>
-        <button className="h-8 px-6 text-sm bg-cyan-500 rounded-md">
+        <Link
+          href={`/profile/${user._id}`}
+          className="h-8 px-6 flex place-items-center text-sm bg-cyan-500 rounded-md"
+        >
           View
-        </button>
+        </Link>
       </div>
-      {/* {isFollowing ? (
-        <div className="flex flex-row gap-2">
-          <button className="h-8 px-6 text-sm bg-cyan-500 rounded-md">
-            unfollow
-          </button>
-          <button className="h-8 px-6 text-sm bg-cyan-500 rounded-md">
-            View
-          </button>
-        </div>
-      ) : user._id == session?.user?.id ? (
-        <button className="h-8 px-6 text-sm bg-cyan-500 rounded-md">
-          View
-        </button>
-      ) : (
-        <div className="flex flex-row gap-2">
-          <button className="h-8 px-6 text-sm bg-cyan-500 rounded-md">
-            Follow
-          </button>
-          <button className="h-8 px-6 text-sm bg-cyan-500 rounded-md">
-            View
-          </button>
-        </div>
-      )} */}
     </div>
   );
 };

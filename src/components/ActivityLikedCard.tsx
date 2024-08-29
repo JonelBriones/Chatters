@@ -1,13 +1,12 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import profileImg from "@/assets/images/profile.png";
-import followUser from "@/app/actions/followUser";
-import redirectToSignIn from "@/app/actions/redirectToSignIn";
+import { MdCancel } from "react-icons/md";
 import ProfilePostCard from "./ProfilePostCard";
 const ActivityLikedCard = ({ currentUser, user, post }: any) => {
   const [showPost, setShowPost] = useState(false);
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between place-items-center bg-neutral-900 p-4 rounded-sm">
       <div className="flex gap-2 place-items-center">
         <Image
           height={40}
@@ -32,11 +31,15 @@ const ActivityLikedCard = ({ currentUser, user, post }: any) => {
       </button>
       {showPost && (
         <>
-          <div className="absolute top-0 left-0 w-screen h-screen bg-neutral-950 opacity-20" />
+          <div className="absolute top-0 left-0 w-screen h-screen bg-neutral-950 opacity-50" />
           <div className="absolute top-0 left-0 w-screen h-screen flex place-items-center justify-center ">
-            <div className="flex flex-col justify-center w-screen h-[500px] place-items-center bg-neutral-950 ">
-              <button onClick={() => setShowPost(false)}>Exist</button>
-              <ProfilePostCard post={post} />
+            <div className="relative">
+              <MdCancel
+                onClick={() => setShowPost(false)}
+                className="absolute top-0 right-0 m-4 cursor-pointer"
+                size={"1.5rem"}
+              />
+              <ProfilePostCard post={post} user={currentUser} />
             </div>
           </div>
         </>
