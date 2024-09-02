@@ -1,8 +1,6 @@
 "use client";
 import React, { useState } from "react";
-
 import ProfilePostCard from "./ProfilePostCard";
-
 const ProfilePost = ({ posts, user }: any) => {
   const [toggleType, setToggleType] = useState("threads");
 
@@ -49,8 +47,8 @@ const ProfilePost = ({ posts, user }: any) => {
             ))}
           </div>
         )}
-        {toggleType == "replies" && <div>Replies Posts</div>}
-        {toggleType == "repost" && <div>Repost Posts</div>}
+        {toggleType == "replies" && <div>No replies found...</div>}
+        {toggleType == "repost" && <div>No reposts found...</div>}
       </div>
     </div>
   );

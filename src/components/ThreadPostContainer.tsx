@@ -1,3 +1,4 @@
+"use server";
 import Image from "next/image";
 import profileImg from "@/assets/images/profile.png";
 import connectDB from "@/config/database";
@@ -7,9 +8,10 @@ import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Link from "next/link";
-const ThreadPostContainer = async ({ post }: any) => {
+const ThreadPostContainer = async ({ post, user }: any) => {
   await connectDB();
-  const postOwner = await User.findById(post.owner);
+  const postOwner =
+    (await User.findById(post.owner)) || (await User.findById(user._id));
   // console.log("postowner", postOwner);
 
   dayjs.extend(duration);
@@ -36,8 +38,8 @@ const ThreadPostContainer = async ({ post }: any) => {
     (diff.seconds() < 59 && `${diff.seconds()} seconds ago`);
 
   return (
-    <div className=" flex gap-4 p-6 bg-neutral-900 rounded-xl">
-      <div className="flex flex-col gap-1">
+    <div className="flex gap-4 p-6 bg-neutral-900 rounded-xl">
+      <div className="flex flex-col gap-1 shrink-0">
         <Image
           src={postOwner?.image || profileImg}
           alt=""
@@ -51,12 +53,14 @@ const ThreadPostContainer = async ({ post }: any) => {
       </div>
       <div className="flex flex-col gap-4">
         <span>
-          <Link href={`/profile/${postOwner._id}`}>@{post.username} </Link>
+          <Link href={`/profile/${postOwner._id}`}>@{postOwner.username} </Link>
           <span className="text-sm text-gray-400">{format}</span>
         </span>
-        <p>{post.text}</p>
-
-        <PostButtons post={post} />
+        <p className="break-all">{post.text}</p>
+        <PostButtons
+          post={JSON.parse(JSON.stringify(post))}
+          user={JSON.parse(JSON.stringify(postOwner))}
+        />
       </div>
     </div>
   );

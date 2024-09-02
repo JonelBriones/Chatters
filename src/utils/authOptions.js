@@ -32,7 +32,7 @@ export const authOptions = {
         await User.create({
           email: profile.email,
           name: username,
-          username: username.trim(),
+          username: username.trim().replace(/\s+/g, "").toLowerCase(),
           image: profile.picture,
         });
       }

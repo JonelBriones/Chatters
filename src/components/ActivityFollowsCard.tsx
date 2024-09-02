@@ -11,7 +11,6 @@ const ActivityFollowsCard = ({ currentUser, user }: any) => {
       return;
     }
     followUser(user._id);
-    // followUser("66c482be3a5df48bf52cfddf");
   };
   const [hoverUnfollow, setHoverUnfollow] = useState("");
 
@@ -19,7 +18,7 @@ const ActivityFollowsCard = ({ currentUser, user }: any) => {
   let isLoggedUserFollowingBack = user.followers.includes(currentUser._id);
 
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between place-items-center bg-neutral-900 p-4 rounded-sm">
       <div className="flex gap-2 place-items-center">
         <Image
           height={40}

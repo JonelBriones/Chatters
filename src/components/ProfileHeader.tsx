@@ -2,9 +2,10 @@ import Image from "next/image";
 import React from "react";
 import profileImg from "@/assets/images/profile.png";
 import { getSessionUser } from "@/utils/getSessionUser";
+import { UserInterface } from "@/types/types";
 
 const ProfileHeader = async ({ user }: any) => {
-  const { user: googleUser }: any | null = await getSessionUser();
+  const { user: googleUser } = (await getSessionUser()) as UserInterface;
   return (
     <div className="flex flex-col gap-8">
       <div className="flex place-items-center gap-2">

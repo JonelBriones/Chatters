@@ -17,7 +17,7 @@ async function createTweet(formData) {
   const images = formData.getAll("images").filter((image) => image.name !== "");
   const postData = {
     owner: userId,
-    username: user.name,
+    username: user.name.trim().replace(/\s+/g, "").toLowerCase(),
     text: formData.get("text"),
   };
   // postData.images = images;

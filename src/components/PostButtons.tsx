@@ -11,10 +11,15 @@ import {
 } from "react-icons/fa";
 import { useSession } from "next-auth/react";
 import redirectToSignIn from "@/app/actions/redirectToSignIn";
-
+interface SessionUser {
+  email: string;
+  id: string | null;
+  image: string;
+  name: string;
+}
 const PostButtons = ({ post }: any) => {
   const { data: user } = useSession();
-
+  console.log("user", user);
   const onHandleLikePost = async () => {
     console.log(user);
     if (!user) {
@@ -23,6 +28,7 @@ const PostButtons = ({ post }: any) => {
     }
     likePost(post._id);
   };
+
   let isLiked = post.likes.includes(user?.user?.id);
 
   const formatCash = (data: any) =>

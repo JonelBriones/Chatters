@@ -12,7 +12,9 @@ const page = async ({ params }: any) => {
   const user = JSON.parse(JSON.stringify(userResult));
   const userPosts = await Post.find({ owner: params.id }).lean();
   const posts = JSON.parse(JSON.stringify(userPosts));
-  console.log("user", user.email);
+  // console.log("user", userResult);
+  // console.log("user", user);
+
   return (
     <div>
       <ProfileHeader user={user} />

@@ -33,7 +33,7 @@ const ActivityLikedCard = ({ currentUser, user, post }: any) => {
         <>
           <div className="absolute top-0 left-0 w-screen h-screen bg-neutral-950 opacity-50" />
           <div className="absolute top-0 left-0 w-screen h-screen flex place-items-center justify-center ">
-            <div className="relative">
+            <div className="relative max-w-[800px]">
               <MdCancel
                 onClick={() => setShowPost(false)}
                 className="absolute top-0 right-0 m-4 cursor-pointer"

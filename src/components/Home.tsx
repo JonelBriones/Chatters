@@ -13,11 +13,14 @@ const Home = async () => {
   return (
     <div className="flex flex-col gap-8">
       <h1 className="font-bold text-3xl">Home Page</h1>
-      {post.reverse().map((post: any) => (
-        <div key={post._id}>
-          <ThreadPostContainer post={post} />
-        </div>
-      ))}
+      {post.reverse().map(
+        (post: any) =>
+          post._id && (
+            <div key={post._id}>
+              <ThreadPostContainer post={post} />
+            </div>
+          )
+      )}
     </div>
   );
 };
