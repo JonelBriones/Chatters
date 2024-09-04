@@ -11,25 +11,30 @@ import {
 } from "react-icons/fa";
 import { useSession } from "next-auth/react";
 import redirectToSignIn from "@/app/actions/redirectToSignIn";
+import { Session } from "next-auth";
+import { toast } from "react-toastify";
 interface SessionUser {
   email: string;
-  id: string | null;
+  id: string;
   image: string;
   name: string;
 }
 const PostButtons = ({ post }: any) => {
   const { data: user } = useSession();
-  console.log("user", user);
+
+  let isLiked = post.likes.includes(user?.user.id);
   const onHandleLikePost = async () => {
     console.log(user);
     if (!user) {
       redirectToSignIn();
+      toast.error("You need to be signed in!");
       return;
     }
-    likePost(post._id);
+    likePost(post._id).then((res) => {
+      if (res.error) return toast.error(res.error);
+      toast.success(res.message);
+    });
   };
-
-  let isLiked = post.likes.includes(user?.user?.id);
 
   const formatCash = (data: any) =>
     Intl.NumberFormat("en-US", {

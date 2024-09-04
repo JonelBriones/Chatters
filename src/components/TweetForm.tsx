@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import createTweet from "@/app/actions/createTweet";
+
 const PostForm = () => {
   return (
     <form className="flex flex-col gap-8" action={createTweet}>
@@ -10,6 +11,7 @@ const PostForm = () => {
         className="border rounded w-full py-2 px-3 outline-none text-black"
         rows={4}
         placeholder="tweet ..."
+        required
       ></textarea>
       <div className="mb-4">
         <label htmlFor="images" className="block text-gray-700 font-bold mb-2">

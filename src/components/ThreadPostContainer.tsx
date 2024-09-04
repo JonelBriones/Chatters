@@ -8,10 +8,14 @@ import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Link from "next/link";
-const ThreadPostContainer = async ({ post, user }: any) => {
+import { getSessionUser } from "@/utils/getSessionUser";
+import { UserInterface } from "@/types/types";
+import PostSettings from "./PostSettings";
+
+const ThreadPostContainer = async ({ post }: any) => {
   await connectDB();
-  const postOwner =
-    (await User.findById(post.owner)) || (await User.findById(user._id));
+  const postOwner = await User.findById(post.owner);
+  const { user } = (await getSessionUser()) as UserInterface;
   // console.log("postowner", postOwner);
 
   dayjs.extend(duration);
@@ -38,8 +42,16 @@ const ThreadPostContainer = async ({ post, user }: any) => {
     (diff.seconds() < 59 && `${diff.seconds()} seconds ago`);
 
   return (
-    <div className="flex gap-4 p-6 bg-neutral-900 rounded-xl">
-      <div className="flex flex-col gap-1 shrink-0">
+    <div className="flex gap-4 p-6 bg-neutral-900 rounded-xl relative">
+      {postOwner?._id == user.id && (
+        <PostSettings post={post} />
+
+        // <FaRegTrashAlt
+        //   className="absolute top-0 right-0 m-4"
+        //   onClick={() => deleteTweet(post)}
+        // />
+      )}
+      <div className="flex flex-col gap-1 shrink-0 ">
         <Image
           src={postOwner?.image || profileImg}
           alt=""
