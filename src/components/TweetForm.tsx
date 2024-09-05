@@ -4,7 +4,10 @@ import createTweet from "@/app/actions/createTweet";
 
 const PostForm = () => {
   return (
-    <form className="flex flex-col gap-8" action={createTweet}>
+    <form
+      className="flex flex-col place-content-end justify-between gap-8 w-full"
+      action={createTweet}
+    >
       <textarea
         id="text"
         name="text"
@@ -13,23 +16,26 @@ const PostForm = () => {
         placeholder="tweet ..."
         required
       ></textarea>
-      <div className="mb-4">
-        <label htmlFor="images" className="block text-gray-700 font-bold mb-2">
-          Images (Select up to 4 images)
-        </label>
-        <input
-          type="file"
-          id="images"
-          name="images"
-          className="border rounded w-full py-2 px-3"
-          accept="image/*"
-          multiple
-        />
-      </div>
 
-      <button className="p-3 bg-cyan-500 rounded-md" type="submit">
-        Post Tweet
-      </button>
+      <div className="">
+        <div className="mb-4">
+          <label htmlFor="images" className="block font-bold mb-2">
+            Images (Select up to 4 images)
+          </label>
+          <input
+            type="file"
+            id="images"
+            name="images"
+            className="border rounded w-full py-2 px-3"
+            accept="image/*"
+            multiple
+          />
+        </div>
+
+        <button className="p-3 bg-cyan-500 rounded-md w-full" type="submit">
+          Post Tweet
+        </button>
+      </div>
     </form>
   );
 };

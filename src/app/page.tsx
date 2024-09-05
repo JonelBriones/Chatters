@@ -1,8 +1,6 @@
 import ThreadPostContainer from "@/components/ThreadPostContainer";
 import connectDB from "@/config/database";
 import Post from "@/models/Post";
-import { getSessionUser } from "@/utils/getSessionUser";
-import { getSession } from "next-auth/react";
 
 export default async function HomePage() {
   await connectDB();

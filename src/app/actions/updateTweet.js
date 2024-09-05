@@ -5,7 +5,7 @@ import { getSessionUser } from "../../utils/getSessionUser";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-async function createTweet(formData) {
+async function updateTweet(postId, formData) {
   await connectDB();
 
   const sessionUser = await getSessionUser();
@@ -15,7 +15,12 @@ async function createTweet(formData) {
   }
 
   const { userId, user } = sessionUser;
-  const images = formData.getAll("images").filter((image) => image.name !== "");
+
+  const existingPost = await Post.findById(postId);
+
+  if (userId !== existingPost.owner.toString()) {
+    throw new Error("You do not have access to make edits to this post.");
+  }
 
   let message;
 
@@ -25,15 +30,13 @@ async function createTweet(formData) {
     text: formData.get("text"),
   };
 
-  // postData.images = images;
-
   if (formData.text) message = "Text required!";
-  const newTweet = new Post(postData);
+  const updateTweet = await Post.findByIdAndUpdate(postId, postData);
 
-  await newTweet.save();
+  await updateTweet.save();
 
   revalidatePath("/", "layout");
   redirect(`/`);
 }
 
-export default createTweet;
+export default updateTweet;

@@ -3,7 +3,6 @@ import ProfilePost from "@/components/ProfilePost";
 import connectDB from "@/config/database";
 import Post from "@/models/Post";
 import User from "@/models/User";
-import { getSessionUser } from "@/utils/getSessionUser";
 import React from "react";
 
 const page = async ({ params }: any) => {

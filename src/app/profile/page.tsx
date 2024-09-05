@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { getSessionUser } from "@/utils/getSessionUser";
 import connectDB from "@/config/database";
 import ProfilePost from "@/components/ProfilePost";

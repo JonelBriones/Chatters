@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React, { useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import SearchProfileCard from "./SearchProfileCard";

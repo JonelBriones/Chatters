@@ -23,7 +23,7 @@ export default function RootLayout({
           <TopNavbar />
           <div className="flex flex-col-reverse place-content-between justify-between md:flex-row">
             <Navbar />
-            <div className="mx-auto my-8 w-11/12 md:w-[800px] md:p-8 h-[90vh] overflow-auto invisible-scrollbar">
+            <div className="mx-auto my-8 w-11/12 md:w-[800px] md:p-8 h-[85vh] md:h-[90vh] overflow-auto invisible-scrollbar">
               {children}
               <ToastContainer />
             </div>
