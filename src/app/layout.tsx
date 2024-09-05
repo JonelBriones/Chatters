@@ -21,11 +21,9 @@ export default function RootLayout({
       <html lang="en">
         <body className="overflow-hidden">
           <TopNavbar />
-          <div className="flex ">
-            <div className="min-w-[220px] hidden md:block px-6 bg-neutral-900 h-screen">
-              <Navbar />
-            </div>
-            <div className="mx-auto my-8 w-11/12 md:w-[800px] p-8 h-[90vh] overflow-auto invisible-scrollbar">
+          <div className="flex flex-col-reverse place-content-between justify-between md:flex-row">
+            <Navbar />
+            <div className="mx-auto my-8 w-11/12 md:w-[800px] md:p-8 h-[90vh] overflow-auto invisible-scrollbar">
               {children}
               <ToastContainer />
             </div>

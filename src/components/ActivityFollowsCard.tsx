@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import profileImg from "@/assets/images/profile.png";
 import followUser from "@/app/actions/followUser";
 import redirectToSignIn from "@/app/actions/redirectToSignIn";
+import Link from "next/link";
 const ActivityFollowsCard = ({ currentUser, user }: any) => {
   const onHandleFollowUser = async () => {
     console.log(user);
@@ -28,7 +29,9 @@ const ActivityFollowsCard = ({ currentUser, user }: any) => {
           className="size-10 bg-red-50 rounded-full"
         />
         <div className="flex flex-col">
-          <span className="font-bold">{user.name}</span>
+          <Link href={`/profile/${user._id}`} className="font-bold">
+            {user.name}
+          </Link>
           <span className="text-sm text-neutral-400 font-bold">
             Followed You
           </span>

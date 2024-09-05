@@ -52,9 +52,9 @@ const ProfilePostCard = ({ post, user }: any) => {
           <Link href={`/profile/${user._id}`}>@{user.username} </Link>
           <span className="text-sm text-gray-400">{format}</span>
         </span>
-        <div className="">
-          <p className="break-all ">{post.text}</p>
-        </div>
+
+        <p>{post.text}</p>
+
         <PostButtons post={post} user={user} />
       </div>
     </div>

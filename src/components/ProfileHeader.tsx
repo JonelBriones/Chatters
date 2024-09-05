@@ -7,7 +7,7 @@ import { UserInterface } from "@/types/types";
 const ProfileHeader = async ({ user }: any) => {
   const { user: googleUser } = (await getSessionUser()) as UserInterface;
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-4">
       <div className="flex place-items-center gap-2">
         <Image
           src={user.image || googleUser?.image || profileImg}

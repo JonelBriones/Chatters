@@ -10,8 +10,8 @@ const Search = ({ users }: any) => {
   const { data: session } = useSession();
 
   return (
-    <div className="flex flex-col gap-8">
-      <h1 className="font-bold text-3xl">Search</h1>
+    <div className="flex flex-col gap-4 md:gap-8">
+      <h1 className="hidden mb:block font-bold text-3xl">Search</h1>
       <div className="flex place-items-center gap-4 p-4 bg-neutral-900 rounded-md ">
         <IoSearch size={"1.75rem"} />
         <input

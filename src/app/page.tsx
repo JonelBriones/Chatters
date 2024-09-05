@@ -11,9 +11,8 @@ export default async function HomePage() {
   const posts = JSON.parse(JSON.stringify(result.reverse()));
 
   return (
-    <div className="flex flex-col gap-8">
-      <h1 className="font-bold text-3xl">Home Page</h1>
-
+    <div className="flex flex-col gap-4">
+      <h1 className="font-bold text-3xl text-center">Home Page</h1>
       {posts.map(
         (post: any) =>
           post._id && (

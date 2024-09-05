@@ -5,7 +5,7 @@ const ProfilePost = ({ posts, user }: any) => {
   const [toggleType, setToggleType] = useState("threads");
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-4">
       <div className="flex">
         <button
           dir="ltr"

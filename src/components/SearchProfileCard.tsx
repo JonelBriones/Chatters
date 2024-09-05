@@ -45,9 +45,12 @@ const SearchProfileCard = ({ user }: any) => {
         />
         <div className="flex flex-col">
           {/* <span className="text-sm text-neutral-400">@{user.username}</span> */}
-          <span className="text-sm text-neutral-400 font-bold">
+          <Link
+            href={`/profile/${user._id}`}
+            className="text-sm text-neutral-400 font-bold"
+          >
             @{user.username}
-          </span>
+          </Link>
         </div>
       </div>
       <div className="flex flex-row gap-2">
@@ -72,15 +75,7 @@ const SearchProfileCard = ({ user }: any) => {
             isLoggedUserFollowingBack &&
             hoverUnfollow &&
             hoverUnfollow}
-
-          {/* {followType()} */}
         </button>
-        <Link
-          href={`/profile/${user._id}`}
-          className="h-8 px-6 flex place-items-center text-sm bg-cyan-500 rounded-md"
-        >
-          View
-        </Link>
       </div>
     </div>
   );

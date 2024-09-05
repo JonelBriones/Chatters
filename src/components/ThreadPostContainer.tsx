@@ -43,21 +43,14 @@ const ThreadPostContainer = async ({ post }: any) => {
 
   return (
     <div className="flex gap-4 p-6 bg-neutral-900 rounded-xl relative">
-      {postOwner?._id == user.id && (
-        <PostSettings post={post} />
-
-        // <FaRegTrashAlt
-        //   className="absolute top-0 right-0 m-4"
-        //   onClick={() => deleteTweet(post)}
-        // />
-      )}
+      {postOwner?._id == user?.id && <PostSettings post={post} />}
       <div className="flex flex-col gap-1 shrink-0 ">
         <Image
           src={postOwner?.image || profileImg}
           alt=""
           width={40}
           height={40}
-          className="size-10 flex-none rounded-full bg-red-300"
+          className="size-10 flex-none rounded-full"
         />
         <div className="h-full flex justify-center">
           <div className="border-l border-neutral-300"></div>
@@ -68,7 +61,9 @@ const ThreadPostContainer = async ({ post }: any) => {
           <Link href={`/profile/${postOwner._id}`}>@{postOwner.username} </Link>
           <span className="text-sm text-gray-400">{format}</span>
         </span>
-        <p className="break-all">{post.text}</p>
+
+        <p className="">{post.text}</p>
+
         <PostButtons
           post={JSON.parse(JSON.stringify(post))}
           user={JSON.parse(JSON.stringify(postOwner))}

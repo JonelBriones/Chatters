@@ -45,7 +45,7 @@ const PostButtons = ({ post }: any) => {
   return (
     <div className="flex gap-6 h-[20px] ">
       <span
-        className={`flex gap-1 w-[60px]  place-items-center cursor-pointer mr-3 ${
+        className={`flex gap-1 place-items-center cursor-pointer  ${
           isLiked ? "text-red-500" : ""
         }`}
         onClick={onHandleLikePost}
@@ -59,16 +59,17 @@ const PostButtons = ({ post }: any) => {
           {post.likes.length > 0 && formatCash(post.likes.length)}
         </span>
       </span>
-      <span className="flex gap-1 w-[60px] place-items-center cursor-pointer mr-3">
+      <span className="flex gap-1 place-items-center cursor-pointer ">
         <FaComment />
         {/* {post.replies.length > 0 && formatCash(post.replies.length)} */}
         {post.replies.length > 0 && formatCash(100070)}
       </span>
-      <span className="flex gap-1 w-[60px] place-items-center cursor-pointer mr-3">
+      <span className="flex gap-1 place-items-center cursor-pointer ">
         <FaRetweet />
+
         {/* {post.likes.length > 0 && formatCash(post.likes.length)} */}
       </span>
-      <span className="flex gap-1 w-[60px] place-items-center cursor-pointer mr-3">
+      <span className="flex gap-1 place-items-center cursor-pointer ">
         <FaShare />
       </span>
     </div>

@@ -9,9 +9,6 @@ const TopNavbar = () => {
   const { data: session } = useSession();
   const profileimage = session?.user?.image;
   const [providers, setProviders] = useState(null);
-  const pathname = usePathname();
-  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   useEffect(() => {
     const setAuthProviders = async () => {
       const res = await getProviders();
@@ -21,7 +18,7 @@ const TopNavbar = () => {
   }, []);
 
   return (
-    <div className="flex justify-between place-items-center bg-neutral-900 px-6 py-3">
+    <div className="hidden md:flex justify-between place-items-center bg-neutral-900 px-6 py-3">
       <Link href="/" className="text-xl px-3 py-2">
         Thread Clone
       </Link>
