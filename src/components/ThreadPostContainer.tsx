@@ -8,19 +8,16 @@ import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Link from "next/link";
-import { getSessionUser } from "@/utils/getSessionUser";
-import { UserInterface } from "@/types/types";
 import PostSettings from "./PostSettings";
+import { getSessionUser } from "@/utils/getSessionUser";
 
 const ThreadPostContainer = async ({ post }: any) => {
   await connectDB();
   const postOwner = await User.findById(post.owner);
-  const { user } = (await getSessionUser()) as UserInterface;
-  // console.log("postowner", postOwner);
-
+  const { userId } = await getSessionUser();
   dayjs.extend(duration);
   dayjs.extend(relativeTime);
-
+  console.log(userId);
   // const isoDate = "2024-08-20T11:14:58.140+00:00";
   const isoDate = post.createdAt;
   const pastDate = dayjs(isoDate);
@@ -43,7 +40,9 @@ const ThreadPostContainer = async ({ post }: any) => {
 
   return (
     <div className="flex gap-4 p-6 bg-neutral-900 rounded-xl relative">
-      {postOwner?._id == user?.id && <PostSettings post={post} />}
+      <div className={`${postOwner?._id == userId ? "visible" : "invisible"}`}>
+        <PostSettings post={post} />
+      </div>
       <div className="flex flex-col gap-1 shrink-0 ">
         <Image
           src={postOwner?.image || profileImg}
@@ -61,9 +60,7 @@ const ThreadPostContainer = async ({ post }: any) => {
           <Link href={`/profile/${postOwner._id}`}>@{postOwner.username} </Link>
           <span className="text-sm text-gray-400">{format}</span>
         </span>
-
         <p className="">{post.text}</p>
-
         <PostButtons
           post={JSON.parse(JSON.stringify(post))}
           user={JSON.parse(JSON.stringify(postOwner))}

@@ -1,4 +1,3 @@
-import ThreadPostContainer from "@/components/ThreadPostContainer";
 import connectDB from "@/config/database";
 import { convertToSerializableObject } from "@/utils/convertToObject";
 import Post from "@/models/Post";
@@ -14,7 +13,12 @@ const page = async ({ params }: any) => {
   console.log("post", postResult);
   if (!postResult) {
     return <h1>Post not found</h1>;
-  } else return <PostFormEdit post={post} />;
+  } else
+    return (
+      <div className="h-[90vh] md:h-full flex md:block place-items-center justify-center">
+        <PostFormEdit post={post} />
+      </div>
+    );
 };
 
 export default page;

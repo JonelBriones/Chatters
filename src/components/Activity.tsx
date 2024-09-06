@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import ActivityFollowsCard from "./ActivityFollowsCard";
 import ActivityLikedCard from "./ActivityLikedCard";
 
-const Activity = ({ user, users, posts }: any) => {
+const Activity = ({ loggedUser, users, posts }: any) => {
   const [toggleType, setToggleType] = useState("likes");
+  console.log(posts);
   return (
     <div className="flex flex-col gap-4">
       <h1 className="hidden mb:block font-bold text-3xl">Activity</h1>
@@ -30,26 +31,29 @@ const Activity = ({ user, users, posts }: any) => {
       {toggleType == "followers" &&
         users.map(
           (u: any) =>
-            user._id != u._id &&
-            u.followings.includes(user._id) && (
-              <ActivityFollowsCard key={user._id} currentUser={user} user={u} />
+            loggedUser._id != u._id &&
+            u.followings.includes(loggedUser._id) && (
+              <ActivityFollowsCard
+                key={loggedUser._id}
+                currentUser={loggedUser}
+                user={u}
+              />
             )
         )}
       {toggleType == "likes" &&
-        posts.map((post: any) =>
-          post.owner == user._id
-            ? users.map(
-                (u: any) =>
-                  user._id != u._id && (
-                    <ActivityLikedCard
-                      key={user._id}
-                      currentUser={user}
-                      user={u}
-                      post={post}
-                    />
-                  )
+        posts?.map((post: any) =>
+          users.map(
+            (u: any) =>
+              loggedUser._id != u._id &&
+              post.likes.includes(u._id) && (
+                <ActivityLikedCard
+                  key={loggedUser._id}
+                  currentUser={loggedUser}
+                  user={u}
+                  post={post}
+                />
               )
-            : null
+          )
         )}
     </div>
   );

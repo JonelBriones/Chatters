@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import profileImg from "@/assets/images/profile.png";
 import PostButtons from "./PostButtons";
@@ -5,21 +6,26 @@ import Link from "next/link";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
+import PostSettings from "./PostSettings";
+import { FcCancel } from "react-icons/fc";
+import { useSession } from "next-auth/react";
 
 const ProfilePostCard = ({ post, user }: any) => {
+  const { data: session } = useSession();
+
   dayjs.extend(duration);
   dayjs.extend(relativeTime);
 
-  // const isoDate = "2024-08-20T11:14:58.140+00:00";
   const isoDate = post.createdAt;
   const pastDate = dayjs(isoDate);
   const currentDate = dayjs();
+
+  // const isoDate = "2024-08-20T11:14:58.140+00:00";
 
   // Calculate the difference
   const diff = dayjs.duration(currentDate.diff(pastDate));
 
   // Format the output
-
   // const timeDifference = `${diff.years()} years, ${diff.months()} months, ${diff.days()} days, ${diff.hours()} hours, ${diff.minutes()} minutes, ${diff.seconds()} seconds`;
 
   let format;
@@ -31,10 +37,15 @@ const ProfilePostCard = ({ post, user }: any) => {
     (diff.minutes() > 0 && `${diff.minutes()} minutes ago`) ||
     (diff.seconds() < 59 && `${diff.seconds()} seconds ago`);
 
-  console.log(post);
-
   return (
-    <div className=" flex gap-4 p-6 bg-neutral-900 rounded-xl">
+    <div className={`flex gap-4 p-6 bg-neutral-900 rounded-xl relative`}>
+      <div
+        className={`${
+          post?.owner == session?.user?.id ? "visible" : "invisible"
+        }`}
+      >
+        <PostSettings post={post} />
+      </div>
       <div className="flex flex-col gap-1 shrink-0">
         <Image
           src={user?.image || profileImg}
@@ -52,9 +63,7 @@ const ProfilePostCard = ({ post, user }: any) => {
           <Link href={`/profile/${user._id}`}>@{user.username} </Link>
           <span className="text-sm text-gray-400">{format}</span>
         </span>
-
         <p>{post.text}</p>
-
         <PostButtons post={post} user={user} />
       </div>
     </div>

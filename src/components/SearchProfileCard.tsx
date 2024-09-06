@@ -18,20 +18,7 @@ const SearchProfileCard = ({ user }: any) => {
     }
     followUser(user._id);
   };
-  console.log("user", user);
 
-  function followType() {
-    if (isUserFollowingYou && !isLoggedUserFollowingBack) {
-      return "Follow Back";
-    } else if (
-      (isUserFollowingYou && isLoggedUserFollowingBack) ||
-      (!isUserFollowingYou && isLoggedUserFollowingBack)
-    ) {
-      return "Unfollow";
-    } else {
-      return "Follow";
-    }
-  }
   const [hoverUnfollow, setHoverUnfollow] = useState("");
   return (
     <div className="p-2 flex justify-between place-items-center">
@@ -44,7 +31,6 @@ const SearchProfileCard = ({ user }: any) => {
           className="size-10 bg-red-50 rounded-full"
         />
         <div className="flex flex-col">
-          {/* <span className="text-sm text-neutral-400">@{user.username}</span> */}
           <Link
             href={`/profile/${user._id}`}
             className="text-sm text-neutral-400 font-bold"

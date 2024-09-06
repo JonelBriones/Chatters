@@ -12,14 +12,15 @@ const page = async () => {
   await connectDB();
 
   const { userId } = (await getSessionUser()) as UserInterface;
-  const user = await User.findById(userId);
+  const loggedUser = await User.findById(userId);
 
   const users = await User.find({}).lean();
-  const posts = await Post.find({}).lean();
+  const posts = await Post.find({ owner: userId }).lean();
+  console.log("LOGGED USER", loggedUser);
 
   return (
     <Activity
-      user={JSON.parse(JSON.stringify(user))}
+      loggedUser={JSON.parse(JSON.stringify(loggedUser))}
       users={JSON.parse(JSON.stringify(users))}
       posts={JSON.parse(JSON.stringify(posts.reverse()))}
     />

@@ -15,6 +15,10 @@ async function deleteTweet(post) {
     throw new Error("User ID is required!");
   }
 
+  if (sessionUser.userId != post.owner) {
+    throw new Error("User does not own this post!");
+  }
+
   await Post.findOneAndDelete({ _id: post._id });
   revalidatePath("/", "layout");
   redirect(`/`);

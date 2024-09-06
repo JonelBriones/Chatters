@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import ProfilePostCard from "./ProfilePostCard";
+import { useSession } from "next-auth/react";
+
 const ProfilePost = ({ posts, user }: any) => {
   const [toggleType, setToggleType] = useState("threads");
-
   return (
     <div className="flex flex-col gap-4">
       <div className="flex">
@@ -47,8 +48,8 @@ const ProfilePost = ({ posts, user }: any) => {
             ))}
           </div>
         )}
-        {toggleType == "replies" && <div>No replies found...</div>}
-        {toggleType == "repost" && <div>No reposts found...</div>}
+        {toggleType == "replies" && <div></div>}
+        {toggleType == "repost" && <div></div>}
       </div>
     </div>
   );

@@ -1,10 +1,8 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 import profileImg from "@/assets/images/profile.png";
-import { MdCancel } from "react-icons/md";
-import ProfilePostCard from "./ProfilePostCard";
+import Link from "next/link";
 const ActivityLikedCard = ({ currentUser, user, post }: any) => {
-  const [showPost, setShowPost] = useState(false);
   return (
     <div className="flex justify-between place-items-center bg-neutral-900 p-4 rounded-sm">
       <div className="flex gap-2 place-items-center">
@@ -22,28 +20,12 @@ const ActivityLikedCard = ({ currentUser, user, post }: any) => {
           </span>
         </div>
       </div>
-
-      <button
-        className="h-8 px-6 text-sm bg-cyan-500 rounded-md"
-        onClick={() => setShowPost(!showPost)}
+      <Link
+        href={`${post._id}`}
+        className="h-8 px-6 text-sm flex place-items-center bg-cyan-500 rounded-md"
       >
         View
-      </button>
-      {showPost && (
-        <>
-          <div className="absolute top-0 left-0 w-screen h-screen bg-neutral-950 opacity-50" />
-          <div className="absolute top-0 left-0 w-screen h-screen flex place-items-center justify-center ">
-            <div className="relative max-w-[800px]">
-              <MdCancel
-                onClick={() => setShowPost(false)}
-                className="absolute top-0 right-0 m-4 cursor-pointer"
-                size={"1.5rem"}
-              />
-              <ProfilePostCard post={post} user={currentUser} />
-            </div>
-          </div>
-        </>
-      )}
+      </Link>
     </div>
   );
 };

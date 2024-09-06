@@ -7,8 +7,9 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 const TopNavbar = () => {
   const { data: session } = useSession();
-  const profileimage = session?.user?.image;
+  const profileimage = session?.user?.image || "";
   const [providers, setProviders] = useState(null);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   useEffect(() => {
     const setAuthProviders = async () => {
       const res = await getProviders();
@@ -56,6 +57,7 @@ const TopNavbar = () => {
           </button>
           <Image
             src={profileimage}
+            alt=""
             width={40}
             height={40}
             className="rounded-full"

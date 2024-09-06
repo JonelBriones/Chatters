@@ -7,6 +7,7 @@ import React from "react";
 
 const page = async ({ params }: any) => {
   await connectDB();
+
   const userResult = await User.findById(params.id);
   const user = JSON.parse(JSON.stringify(userResult));
   const userPosts = await Post.find({ owner: params.id }).lean();

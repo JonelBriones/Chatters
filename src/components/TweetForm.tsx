@@ -17,7 +17,7 @@ const PostForm = () => {
         required
       ></textarea>
 
-      <div className="">
+      <div>
         <div className="mb-4">
           <label htmlFor="images" className="block font-bold mb-2">
             Images (Select up to 4 images)
