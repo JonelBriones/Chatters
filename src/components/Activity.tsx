@@ -5,7 +5,6 @@ import ActivityLikedCard from "./ActivityLikedCard";
 
 const Activity = ({ loggedUser, users, posts }: any) => {
   const [toggleType, setToggleType] = useState("likes");
-  console.log(posts);
   return (
     <div className="flex flex-col gap-4">
       <h1 className="hidden mb:block font-bold text-3xl">Activity</h1>
