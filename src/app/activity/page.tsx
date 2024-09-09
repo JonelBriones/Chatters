@@ -3,6 +3,8 @@ import connectDB from "@/config/database";
 import User from "@/models/User";
 import { getSessionUser } from "@/utils/getSessionUser";
 import React from "react";
+import { getUserFollowings } from "@/utils/getUserFollowings";
+import { stringify } from "querystring";
 import Post from "@/models/Post";
 import { UserInterface } from "@/types/types";
 

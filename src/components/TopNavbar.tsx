@@ -1,15 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { FaGoogle } from "react-icons/fa";
-import profileImg from "@/assets/images/profile.png";
-
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 const TopNavbar = () => {
   const { data: session } = useSession();
-
-  const sessionImage = session?.user?.image;
+  const profileimage = session?.user?.image || "";
   const [providers, setProviders] = useState<Record<string, any> | null>(null);
 
   useEffect(() => {
@@ -56,7 +53,7 @@ const TopNavbar = () => {
             Sign Out
           </button>
           <Image
-            src={sessionImage || profileImg}
+            src={profileimage}
             alt=""
             width={40}
             height={40}

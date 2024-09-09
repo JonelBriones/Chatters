@@ -41,15 +41,13 @@ export const authOptions = {
     },
     // Session callback function that modifies the session object
 
-    async session({ session, token }) {
+    async session({ session }) {
       // 1. Get user from database
       const user = await User.findOne({ email: session.user.email });
       console.log("running function session... ", session.user);
 
       // 2. Assign user id from the session
       session.user.id = user._id.toString();
-      session.accessToken = token.accessToken;
-
       // 3. Return session
 
       return session;
