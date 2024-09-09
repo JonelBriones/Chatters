@@ -8,10 +8,11 @@ import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PostSettings from "./PostSettings";
 import { useSession } from "next-auth/react";
+import { SessionUser } from "@/types/types";
 
 const ProfilePostCard = ({ post, user }: any) => {
   const { data: session } = useSession();
-  const sessionId = session?.user?.id || {};
+  const sessionId = (session?.user as SessionUser)?.id;
   dayjs.extend(duration);
   dayjs.extend(relativeTime);
 

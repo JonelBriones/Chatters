@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import likePost from "@/app/actions/likePost";
-import { IoHeartOutline } from "react-icons/io5";
 import {
   FaHeart,
   FaComment,
@@ -11,19 +10,13 @@ import {
 } from "react-icons/fa";
 import { useSession } from "next-auth/react";
 import redirectToSignIn from "@/app/actions/redirectToSignIn";
-interface SessionUser {
-  email: string;
-  id: string;
-  image: string;
-  name: string;
-}
-const PostButtons = ({ post }: any) => {
-  const { data: user } = useSession();
+import { SessionUser } from "@/types/types";
 
-  let isLiked = post.likes.includes(user?.user?.id);
+const PostButtons = ({ post }: any) => {
+  const { data: session } = useSession();
+  let isLiked = post.likes.includes((session?.user as SessionUser)?.id);
   const onHandleLikePost = async () => {
-    console.log(user);
-    if (!user) {
+    if (!session) {
       redirectToSignIn();
       return;
     }

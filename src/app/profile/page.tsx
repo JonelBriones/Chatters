@@ -11,13 +11,14 @@ const page = async () => {
   const userResult = await User.findById(userId);
   const user = JSON.parse(JSON.stringify(userResult));
   const userPosts = await Post.find({ owner: userId }).lean();
-  const posts = JSON.parse(JSON.stringify(userPosts));
+  const posts = JSON.parse(JSON.stringify(userPosts.reverse()));
+
   console.log("user", user);
 
   return (
     <div>
       <ProfileHeader user={user} />
-      <ProfilePost posts={posts.reverse()} user={user} />
+      <ProfilePost posts={posts} user={user} />
     </div>
   );
 };
