@@ -7,7 +7,7 @@ import Image from "next/image";
 const TopNavbar = () => {
   const { data: session } = useSession();
   const profileimage = session?.user?.image || "";
-  const [providers, setProviders] = useState<Record<string, any> | null>(null);
+  const [providers, setProviders] = useState(null);
 
   useEffect(() => {
     const setAuthProviders = async () => {
@@ -48,6 +48,7 @@ const TopNavbar = () => {
             }}
             className=" text-sm hover:bg-gray-700 rounded-md px-3 py-2"
             role="menuitem"
+            tabIndex="-1"
             id="user-menu-item-2"
           >
             Sign Out
