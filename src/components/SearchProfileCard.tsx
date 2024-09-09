@@ -1,5 +1,6 @@
 import followUser from "@/app/actions/followUser";
 import redirectToSignIn from "@/app/actions/redirectToSignIn";
+import { SessionUser } from "@/types/types";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +8,7 @@ import React, { useState } from "react";
 
 const SearchProfileCard = ({ user }: any) => {
   const { data: session } = useSession();
-  let sessionId = session?.user?.id;
+  let sessionId = (session?.user as SessionUser)?.id;
   let isUserFollowingYou = user.followings.includes(sessionId) || null;
   let isLoggedUserFollowingBack = user.followers.includes(sessionId);
 

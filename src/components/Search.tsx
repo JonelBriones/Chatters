@@ -3,11 +3,12 @@ import React, { useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import SearchProfileCard from "./SearchProfileCard";
 import { useSession } from "next-auth/react";
+import { SessionUser } from "@/types/types";
 
 const Search = ({ users }: any) => {
   const [search, setSearch] = useState("");
   const { data: session } = useSession();
-
+  const sessionId = (session?.user as SessionUser)?.id;
   return (
     <div className="flex flex-col gap-4 md:gap-8">
       <h1 className="hidden mb:block font-bold text-3xl">Search</h1>
@@ -21,11 +22,11 @@ const Search = ({ users }: any) => {
         />
       </div>
       {users.map((user: any) =>
-        !search && user._id != session?.user?.id ? (
+        !search && user._id != sessionId ? (
           <SearchProfileCard user={user} key={user._id} />
         ) : (
           user.username.toLowerCase().includes(search) &&
-          user._id != session?.user?.id && (
+          user._id != sessionId && (
             <SearchProfileCard user={user} key={user._id} />
           )
         )
