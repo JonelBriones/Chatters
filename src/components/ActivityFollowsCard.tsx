@@ -14,7 +14,6 @@ const ActivityFollowsCard = ({ currentUser, user }: any) => {
       return;
     }
     followUser(user._id).then((res) => {
-      if (res.error) return toast.error(res.error);
       toast.success(res.message);
     });
   };
