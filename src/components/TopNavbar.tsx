@@ -5,10 +5,12 @@ import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 const TopNavbar = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const profileimage = session?.user?.image || "";
-  const [providers, setProviders] = useState(null);
-
+  const [providers, setProviders] = useState<Record<string, any> | null>(null);
+  if (status === "authenticated") {
+    console.log("USER IS LOGGED IN");
+  }
   useEffect(() => {
     const setAuthProviders = async () => {
       const res = await getProviders();
@@ -24,7 +26,7 @@ const TopNavbar = () => {
       </Link>
 
       {/* <!-- Right Side Menu (Logged Out) --> */}
-      {!session && (
+      {status !== "authenticated" && (
         <>
           {providers &&
             Object.values(providers).map((provider: any, idx) => (
@@ -48,7 +50,6 @@ const TopNavbar = () => {
             }}
             className=" text-sm hover:bg-gray-700 rounded-md px-3 py-2"
             role="menuitem"
-            tabIndex="-1"
             id="user-menu-item-2"
           >
             Sign Out

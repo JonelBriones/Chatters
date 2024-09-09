@@ -21,7 +21,6 @@ export const authOptions = {
     async signIn({ profile }) {
       console.log("running function signIn... ");
       // 1. Connect to database
-      console.log("Profile", profile);
       await connectDB();
       // 2. Check if user exist
       const userExist = await User.findOne({ email: profile.email });
@@ -48,6 +47,7 @@ export const authOptions = {
 
       // 2. Assign user id from the session
       session.user.id = user._id.toString();
+
       // 3. Return session
 
       return session;

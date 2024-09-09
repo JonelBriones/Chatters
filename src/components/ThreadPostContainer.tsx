@@ -18,7 +18,7 @@ const ThreadPostContainer = async ({ post }: any) => {
   const { userId } = user || {};
   dayjs.extend(duration);
   dayjs.extend(relativeTime);
-  console.log(userId);
+
   // const isoDate = "2024-08-20T11:14:58.140+00:00";
   const isoDate = post.createdAt;
   const pastDate = dayjs(isoDate);
