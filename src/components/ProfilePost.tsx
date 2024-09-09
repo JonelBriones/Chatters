@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import ProfilePostCard from "./ProfilePostCard";
-import { useSession } from "next-auth/react";
 
 const ProfilePost = ({ posts, user }: any) => {
   const [toggleType, setToggleType] = useState("threads");
