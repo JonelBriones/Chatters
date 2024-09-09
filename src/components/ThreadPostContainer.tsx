@@ -14,7 +14,8 @@ import { getSessionUser } from "@/utils/getSessionUser";
 const ThreadPostContainer = async ({ post }: any) => {
   await connectDB();
   const postOwner = await User.findById(post.owner);
-  const { userId } = await getSessionUser();
+  const user = await getSessionUser();
+  const { userId } = user || {};
   dayjs.extend(duration);
   dayjs.extend(relativeTime);
   console.log(userId);

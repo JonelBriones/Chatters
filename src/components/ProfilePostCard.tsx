@@ -7,12 +7,11 @@ import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PostSettings from "./PostSettings";
-import { FcCancel } from "react-icons/fc";
 import { useSession } from "next-auth/react";
 
 const ProfilePostCard = ({ post, user }: any) => {
   const { data: session } = useSession();
-
+  const sessionId = session?.user?.id || {};
   dayjs.extend(duration);
   dayjs.extend(relativeTime);
 
@@ -39,11 +38,7 @@ const ProfilePostCard = ({ post, user }: any) => {
 
   return (
     <div className={`flex gap-4 p-6 bg-neutral-900 rounded-xl relative`}>
-      <div
-        className={`${
-          post?.owner == session?.user?.id ? "visible" : "invisible"
-        }`}
-      >
+      <div className={`${post?.owner == sessionId ? "visible" : "invisible"}`}>
         <PostSettings post={post} />
       </div>
       <div className="flex flex-col gap-1 shrink-0">

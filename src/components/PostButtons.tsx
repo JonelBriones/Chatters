@@ -11,8 +11,6 @@ import {
 } from "react-icons/fa";
 import { useSession } from "next-auth/react";
 import redirectToSignIn from "@/app/actions/redirectToSignIn";
-import { Session } from "next-auth";
-import { toast } from "react-toastify";
 interface SessionUser {
   email: string;
   id: string;
@@ -22,18 +20,14 @@ interface SessionUser {
 const PostButtons = ({ post }: any) => {
   const { data: user } = useSession();
 
-  let isLiked = post.likes.includes(user?.user.id);
+  let isLiked = post.likes.includes(user?.user?.id);
   const onHandleLikePost = async () => {
     console.log(user);
     if (!user) {
       redirectToSignIn();
-      toast.error("You need to be signed in!");
       return;
     }
-    likePost(post._id).then((res) => {
-      if (res.error) return toast.error(res.error);
-      toast.success(res.message);
-    });
+    likePost(post._id);
   };
 
   const formatCash = (data: any) =>

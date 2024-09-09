@@ -9,7 +9,7 @@ const TopNavbar = () => {
   const { data: session } = useSession();
   const profileimage = session?.user?.image || "";
   const [providers, setProviders] = useState(null);
-  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+
   useEffect(() => {
     const setAuthProviders = async () => {
       const res = await getProviders();
@@ -45,7 +45,6 @@ const TopNavbar = () => {
         <div className="flex items-centers gap-4">
           <button
             onClick={() => {
-              setIsProfileMenuOpen(false);
               signOut();
             }}
             className=" text-sm hover:bg-gray-700 rounded-md px-3 py-2"

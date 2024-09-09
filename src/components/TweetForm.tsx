@@ -18,7 +18,7 @@ const PostForm = () => {
       ></textarea>
 
       <div>
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label htmlFor="images" className="block font-bold mb-2">
             Images (Select up to 4 images)
           </label>
@@ -30,7 +30,7 @@ const PostForm = () => {
             accept="image/*"
             multiple
           />
-        </div>
+        </div> */}
 
         <button className="p-3 bg-cyan-500 rounded-md w-full" type="submit">
           Post Tweet

@@ -4,15 +4,21 @@ import profileImg from "@/assets/images/profile.png";
 import followUser from "@/app/actions/followUser";
 import redirectToSignIn from "@/app/actions/redirectToSignIn";
 import Link from "next/link";
+import { toast } from "react-toastify";
 const ActivityFollowsCard = ({ currentUser, user }: any) => {
   const onHandleFollowUser = async () => {
     console.log(user);
     if (!user) {
       redirectToSignIn();
+      toast.error("You need to be signed in!");
       return;
     }
-    followUser(user._id);
+    followUser(user._id).then((res) => {
+      if (res.error) return toast.error(res.error);
+      toast.success(res.message);
+    });
   };
+
   const [hoverUnfollow, setHoverUnfollow] = useState("");
 
   let isUserFollowingYou = user.followings.includes(currentUser._id);
