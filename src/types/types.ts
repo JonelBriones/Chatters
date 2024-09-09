@@ -1,6 +1,11 @@
 export interface UserInterface {
   userId: number;
-  user: {};
+  user: {
+    email: string;
+    image: string;
+    name: string;
+    id: string;
+  };
 }
 export interface SessionUser {
   email: string;

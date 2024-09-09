@@ -1,3 +1,4 @@
+"use server";
 import Image from "next/image";
 import React from "react";
 import profileImg from "@/assets/images/profile.png";
@@ -6,6 +7,7 @@ import { UserInterface } from "@/types/types";
 
 const ProfileHeader = async ({ user }: any) => {
   const { user: googleUser } = (await getSessionUser()) as UserInterface;
+  console.log("google", googleUser);
   return (
     <div className="flex flex-col gap-4">
       <div className="flex place-items-center gap-2">

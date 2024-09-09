@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import ThreadPostContainer from "./ThreadPostContainer";
-
 const ProfilePosts = ({ posts }: any) => {
   console.log("POST", posts);
   return (
